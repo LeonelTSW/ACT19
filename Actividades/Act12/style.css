@@ -1,0 +1,168 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --azul-oscuro: #0b2340;
+    --azul-claro: #1f4f7a;
+    --rojo: #d62828;
+    --rojo-oscuro: #a71d2a;
+    --blanco: #ffffff;
+    --gris-texto: #888;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+    background: var(--azul-oscuro);
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+}
+
+.container {
+    background: var(--blanco);
+    border-radius: 12px;
+    padding: 35px;
+    max-width: 850px;
+    width: 100%;
+    border: 2px solid var(--azul-claro);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+}
+
+h1 {
+    text-align: center;
+    color: var(--azul-oscuro);
+    margin-bottom: 10px;
+    font-size: 2em;
+}
+
+.subtitle {
+    text-align: center;
+    color: var(--gris-texto);
+    margin-bottom: 25px;
+}
+
+.datos-academicos p {
+    color: #000;
+    margin-bottom: 5px;
+}
+
+.input-section {
+    margin-bottom: 25px;
+}
+
+label {
+    font-weight: 600;
+    color: var(--azul-oscuro);
+    margin-bottom: 8px;
+    display: block;
+}
+
+.help-text {
+    font-size: 0.85em;
+    color: var(--gris-texto);
+    margin-top: 6px;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    border-radius: 6px;
+    border: 2px solid var(--azul-claro);
+    font-size: 1em;
+    background: #eef5ff;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    border-color: var(--rojo);
+    box-shadow: 0 0 6px rgba(214,40,40,0.4);
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    background: var(--rojo);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1em;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+button:hover {
+    background: var(--rojo-oscuro);
+}
+
+.result-section {
+    margin-top: 25px;
+    padding: 20px;
+    border: 2px solid var(--azul-claro);
+    border-radius: 8px;
+    background: #f6f8ff;
+    display: none;
+}
+
+.result-section.show {
+    display: block;
+}
+
+.result-title {
+    margin-bottom: 10px;
+    font-size: 1.2em;
+    font-weight: 700;
+    color: var(--azul-oscuro);
+    border-bottom: 3px solid var(--rojo);
+    display: inline-block;
+}
+
+.process-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+.process-table td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+.process-table tr:first-child td {
+    background: var(--azul-claro);
+    color: white;
+    font-weight: 600;
+}
+
+.divisor-cell {
+    background: #e0ecff;
+    font-weight: 600;
+}
+
+.final-result {
+    margin-top: 15px;
+    padding: 12px;
+    background: #e9f2ff;
+    border-left: 5px solid var(--rojo);
+}
+
+.error {
+    margin-top: 15px;
+    padding: 15px;
+    background: #ffe5e5;
+    border-left: 5px solid var(--rojo);
+    color: var(--rojo-oscuro);
+}
+
+.example {
+    background: #f6f6f6;
+    padding: 12px;
+    border-radius: 6px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+}
