@@ -7,6 +7,30 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+    <a href="../../index.html" class="btn-regreso">Portafolio</a>
+
+<style>
+.btn-regreso {
+    position: fixed;      /* Fijo en la pantalla */
+    bottom: 10px;         /* 10px desde el borde inferior */
+    left: 10px;           /* 10px desde el borde izquierdo */
+    padding: 5px 10px;    /* Tamaño pequeño */
+    font-size: 12px;      /* Texto pequeño */
+    background-color: #3498db;
+    color: white;
+    text-decoration: none; /* Quitar subrayado del enlace */
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    z-index: 1000;        /* Que esté encima de otros elementos */
+    transition: background-color 0.3s;
+}
+
+.btn-regreso:hover {
+    background-color: #2980b9;
+}
+</style>
+
     <div class="container">
         <h1>Calculadora de Variables</h1>
 
