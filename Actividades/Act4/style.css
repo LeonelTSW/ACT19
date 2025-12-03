@@ -1,0 +1,129 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html,body { height: 100%; }
+
+:root{
+    --bg:#0b2340;
+    --panel:#123a63;
+    --accent:#d62828;
+    --soft:#e8f1ff;
+    --muted:#b7c4d9;
+    --metal:#c7d2e2;
+}
+
+body{
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(180deg,var(--bg), #051a2e 120%);
+    color: var(--soft);
+    padding: 24px;
+}
+
+.container{
+    max-width: 800px;
+    margin: 18px auto;
+    background: rgba(255,255,255,0.03);
+    border-radius: 12px;
+    padding: 22px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+    border: 1px solid rgba(255,255,255,0.06);
+}
+
+header.app-header{ margin-bottom: 18px; }
+
+h1{ 
+    font-size:20px; 
+    margin-bottom:10px; 
+    color:var(--soft); 
+    font-weight:600; 
+}
+
+.meta{
+    display:flex; 
+    gap:12px; 
+    flex-wrap:wrap; 
+    color:var(--muted); 
+    font-size:13px; 
+}
+
+.meta b{ color:var(--metal); }
+
+.form-section{
+    background: rgba(255,255,255,0.02);
+    padding:14px;
+    border-radius:10px;
+    border:1px solid rgba(255,255,255,0.05);
+    margin-bottom: 16px;
+}
+
+.form-section h2{
+    font-size:16px; 
+    color:var(--metal); 
+    margin-bottom:10px; 
+}
+
+.input-group{
+    display:flex; 
+    flex-wrap:wrap; 
+    gap:10px; 
+    align-items:center;
+}
+
+label { 
+    color:var(--muted); 
+    min-width:18px; 
+    font-weight:600; 
+}
+
+input[type="text"]{
+    width:120px; 
+    padding:8px 10px; 
+    border-radius:6px;
+    border:1px solid rgba(255,255,255,0.08); 
+    background: rgba(255,255,255,0.04);
+    color:var(--soft); 
+    font-family: 'Courier New', monospace; 
+    text-align:center; 
+    font-size:14px; 
+}
+
+input[readonly]{
+    background: rgba(255,255,255,0.02); 
+    opacity:0.9; 
+    cursor:not-allowed; 
+}
+
+.operator{ 
+    color:var(--muted); 
+    font-weight:600; 
+    margin: 0 6px; 
+}
+
+.result{
+    margin-top:12px; 
+    background: rgba(255,255,255,0.02);
+    padding:10px 12px; 
+    border-radius:8px; 
+    font-family: 'Courier New', monospace; 
+    font-size:15px;
+    color:var(--soft); 
+    min-height:46px; 
+    display:flex; 
+    align-items:center; 
+    border-left:4px solid var(--accent); 
+}
+
+.controls{
+    display:flex; 
+    gap:10px; 
+    justify-content:flex-end; 
+    margin-top:14px; 
+}
+
+.clear-btn{
+    background: linear-gradient(180deg,var(--accent), #a91b1b); 
+    color:white; 
+    border:none;
+    padding:10px 14px; 
+    border-radius:8px; 
+    cursor:pointer; 
+    font-weight:700; 
+}

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Actividad 4 - Conversión de Números Complejos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container" role="main">
+        <header class="app-header">
+            <h1>Calculadora de Conversiones de Números Complejos</h1>
+            <div class="meta">
+                <div><b>Institución:</b> Tecnológico de Software</div>
+                <div><b>Materia:</b> Fundamentos de Álgebra</div>
+                <div><b>Docente:</b> Jorge Javier Pedroza Romero</div>
+                <div><b>Alumno:</b> Leonel Zapata Angulo</div>
+                <div><b>Grupo:</b> 1A</div>
+            </div>
+        </header>
+
+        <main aria-live="polite">
+            <section class="form-section">
+                <h2>Forma Cartesiana: a + bi</h2>
+                <div class="input-group">
+                    <label for="real">z =</label>
+                    <input type="text" id="real" placeholder="a">
+                    <span class="operator">+</span>
+                    <input type="text" id="imag" placeholder="b">
+                    <span class="operator">i</span>
+                </div>
+                <div class="result" id="cartesian-result">Ingresa los valores arriba</div>
+            </section>
+
+            <section class="form-section">
+                <h2>Forma Polar: r(cos θ + i sin θ)</h2>
+                <div class="input-group">
+                    <label for="modulus">z =</label>
+                    <input type="text" id="modulus" placeholder="r">
+                    <span class="operator">(cos</span>
+                    <input type="text" id="angle" placeholder="θ">
+                    <span class="operator">+ i sin</span>
+                    <input type="text" id="angle2" readonly style="width:88px;">
+                    <span class="operator">)</span>
+                </div>
+                <div class="result" id="polar-result">Ingresa los valores arriba</div>
+            </section>
+
+            <section class="form-section">
+                <h2>Forma Exponencial: r e^(iθ)</h2>
+                <div class="input-group">
+                    <label for="exp-modulus">z =</label>
+                    <input type="text" id="exp-modulus" placeholder="r">
+                    <span class="operator">e^(i*</span>
+                    <input type="text" id="exp-angle" placeholder="θ">
+                    <span class="operator">)</span>
+                </div>
+                <div class="result" id="exponential-result">Ingresa los valores arriba</div>
+            </section>
+        </main>
+
+        <div class="controls">
+            <button class="clear-btn" onclick="clearAll()">Limpiar Todo</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
