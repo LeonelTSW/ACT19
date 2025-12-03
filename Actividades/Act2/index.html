@@ -949,108 +949,102 @@ function calculateDistance() {
     `;
 }
 
-// ========== SELECTORES PERSONALIZADOS ==========
-
-/**
- * Inicializa los selectores personalizados para la calculadora de distancias
- */
-function initCustomSelects() {
+// ====== SELECTORES PERSONALIZADOS ESTABLES ======
+function initDistanceSelectors() {
     ['pointA', 'pointB'].forEach(selectId => {
         const container = document.getElementById(selectId + '-container');
-        const selected = document.getElementById(selectId + '-selected');
-        const items = document.getElementById(selectId + '-items');
+        const selected = container.querySelector('.select-selected');
+        const itemsContainer = container.querySelector('.select-items');
 
-        // Manejar clic en el selector principal
+        // Alternar dropdown al hacer clic en el contenedor
         selected.addEventListener('click', function(e) {
             e.stopPropagation();
+            closeAllSelectsExcept(itemsContainer);
 
-            // Cerrar otros dropdowns primero
-            document.querySelectorAll('.select-items').forEach(otherItems => {
-                if (otherItems !== items) {
-                    otherItems.classList.remove('show');
-                }
-            });
-            document.querySelectorAll('.select-selected').forEach(otherSelected => {
-                if (otherSelected !== selected) {
-                    otherSelected.classList.remove('select-arrow-active');
-                }
-            });
-
-            // Alternar el estado del dropdown actual
-            const isCurrentlyOpen = items.classList.contains('show');
-            if (isCurrentlyOpen) {
-                items.classList.remove('show');
-                selected.classList.remove('select-arrow-active');
-                adjustZIndex(null); // Resetear z-index
-            } else {
-                items.classList.add('show');
-                selected.classList.add('select-arrow-active');
-                adjustZIndex(selectId); // Aumentar z-index para el selector activo
-            }
+            itemsContainer.classList.toggle('show');
+            selected.classList.toggle('select-arrow-active');
         });
 
-        // Manejar clics en las opciones del dropdown
-        items.addEventListener('click', function(e) {
-            e.stopPropagation();
-            if (e.target.hasAttribute('data-value')) {
-                // Actualizar el texto mostrado
-                selected.textContent = e.target.textContent;
-                container.setAttribute('data-value', e.target.getAttribute('data-value'));
+        // Delegación de eventos: manejar clic en cualquier opción
+        itemsContainer.addEventListener('click', function(e) {
+            const option = e.target.closest('div[data-value]');
+            if (!option) return;
 
-                // Remover clase 'selected' de todas las opciones
-                items.querySelectorAll('.selected').forEach(item => item.classList.remove('selected'));
+            selected.textContent = option.textContent;
+            container.setAttribute('data-value', option.getAttribute('data-value'));
 
-                // Agregar clase 'selected' a la opción clickeada
-                e.target.classList.add('selected');
+            // Marcar la opción seleccionada
+            itemsContainer.querySelectorAll('.selected').forEach(o => o.classList.remove('selected'));
+            option.classList.add('selected');
 
-                // Cerrar el dropdown
-                items.classList.remove('show');
-                selected.classList.remove('select-arrow-active');
-                adjustZIndex(null); // Resetear z-index
-            }
+            // Cerrar el dropdown
+            itemsContainer.classList.remove('show');
+            selected.classList.remove('select-arrow-active');
+            adjustZIndex(null);
         });
+    });
+
+    // Cerrar selectores al hacer clic fuera
+    document.addEventListener('click', function() {
+        closeAllSelects();
+        adjustZIndex(null);
     });
 }
 
-/**
- * Cierra todos los selectores personalizados abiertos
- */
-function closeAllSelect() {
+// Cierra todos los dropdowns excepto el activo
+function closeAllSelectsExcept(activeItemsContainer) {
     document.querySelectorAll('.select-items').forEach(items => {
-        items.classList.remove('show');
+        if (items !== activeItemsContainer) items.classList.remove('show');
     });
     document.querySelectorAll('.select-selected').forEach(selected => {
-        selected.classList.remove('select-arrow-active');
+        if (!activeItemsContainer || !activeItemsContainer.contains(selected)) {
+            selected.classList.remove('select-arrow-active');
+        }
     });
 }
 
-/**
- * Ajusta los z-index para evitar problemas de superposición en los dropdowns
- * @param {string|null} activeSelectId - ID del selector activo o null para resetear
- */
-function adjustZIndex(activeSelectId) {
-    // Resetear todos los z-indexes a valores base
-    document.querySelectorAll('.distance-field').forEach(field => {
-        field.style.zIndex = '100';
-    });
-    document.querySelectorAll('.distance-field .custom-select').forEach(select => {
-        select.style.zIndex = '101';
-    });
-    document.querySelectorAll('.distance-field .select-items').forEach(items => {
-        items.style.zIndex = '1000';
-    });
+// Cierra todos los dropdowns
+function closeAllSelects() {
+    document.querySelectorAll('.select-items').forEach(items => items.classList.remove('show'));
+    document.querySelectorAll('.select-selected').forEach(selected => selected.classList.remove('select-arrow-active'));
+}
 
-    // Aumentar el z-index del selector activo
-    if (activeSelectId) {
-        const activeField = document.getElementById(activeSelectId + '-container').closest('.distance-field');
-        const activeSelect = document.getElementById(activeSelectId + '-container');
-        const activeItems = document.getElementById(activeSelectId + '-items');
+// Actualiza las opciones dinámicamente
+function updateDistanceSelectors() {
+    const pointAItems = document.getElementById('pointA-items');
+    const pointBItems = document.getElementById('pointB-items');
+    const pointAContainer = document.getElementById('pointA-container');
+    const pointBContainer = document.getElementById('pointB-container');
+    const pointASelected = document.getElementById('pointA-selected');
+    const pointBSelected = document.getElementById('pointB-selected');
 
-        if (activeField) activeField.style.zIndex = '2000';
-        if (activeSelect) activeSelect.style.zIndex = '2001';
-        if (activeItems) activeItems.style.zIndex = '12000';
+    // Limpiar opciones previas
+    pointAItems.innerHTML = '<div data-value="">Selecciona un punto</div>';
+    pointBItems.innerHTML = '<div data-value="">Selecciona un punto</div>';
+
+    if (points.length === 0) {
+        pointASelected.textContent = 'Selecciona un punto';
+        pointBSelected.textContent = 'Selecciona un punto';
+        pointAContainer.setAttribute('data-value', '');
+        pointBContainer.setAttribute('data-value', '');
+        return;
     }
+
+    // Agregar opciones dinámicamente
+    points.forEach((point, index) => {
+        const optionText = `${point.originalInput} (${point.value.toFixed(3)})`;
+        const optionA = document.createElement('div');
+        optionA.setAttribute('data-value', index);
+        optionA.textContent = optionText;
+        pointAItems.appendChild(optionA);
+
+        const optionB = document.createElement('div');
+        optionB.setAttribute('data-value', index);
+        optionB.textContent = optionText;
+        pointBItems.appendChild(optionB);
+    });
 }
+
 
 // ========== INICIALIZACIÓN Y EVENT LISTENERS ==========
 
@@ -1075,11 +1069,10 @@ document.addEventListener('click', function(e) {
 
 // ========== INICIALIZACIÓN DE LA APLICACIÓN ==========
 
-// Inicializar los selectores personalizados
-initCustomSelects();
+// Inicialización de selectores
+initDistanceSelectors();
+updateDistanceSelectors();
 
-// Mostrar la visualización inicial
-updateDisplay();
  
 </script> 
 </body> 

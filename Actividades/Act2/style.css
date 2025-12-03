@@ -1,4 +1,21 @@
 /* ===== RESET BÁSICO ===== */
+
+.custom-select {
+    position: relative;
+    cursor: pointer;
+}
+
+.select-items {
+    position: absolute;
+    display: none;
+    background-color: white;
+    border: 1px solid #ccc;
+    z-index: 1000;
+}
+.select-items.show {
+    display: block;
+}
+
 * {
     margin: 0;
     padding: 0;
