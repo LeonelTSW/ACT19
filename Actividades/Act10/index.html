@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Actividad 10 - Productos Notables</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Animaciones de Productos Notables</h1>
+
+    <div class="card">
+        <h2>Selecciona un producto notable</h2>
+
+        <select id="tipo">
+            <option value="cuadradoBinomio">Cuadrado de un binomio</option>
+            <option value="productoSumaResta">(a + b)(a - b)</option>
+            <option value="binomioConjugado">Binomios conjugados</option>
+        </select>
+
+        <label>Valor de a:</label>
+        <input type="number" id="a">
+
+        <label>Valor de b:</label>
+        <input type="number" id="b">
+
+        <button onclick="calcular()">Calcular</button>
+
+        <div id="pasos" class="anim"></div>
+        <div id="resultado" class="result"></div>
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
